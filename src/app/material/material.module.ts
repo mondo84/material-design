@@ -6,11 +6,15 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';   // Boton.
 import { MatDividerModule } from '@angular/material/divider'; // Barra divisora.
 import { MatSidenavModule } from '@angular/material/sidenav'; // Sidenav.
-import { MatToolbarModule } from '@angular/material/toolbar'; // toolbar
+import { MatToolbarModule } from '@angular/material/toolbar'; // toolbar Navbar
 import { MatIconModule } from '@angular/material/icon'; // Iconos de material design.
 import { MatListModule } from '@angular/material/list';   // Listado de material.
 import { MatCardModule } from '@angular/material/card'; // Card.
 import { MatGridListModule } from '@angular/material/grid-list'; // grid.
+import { MatMenuModule } from '@angular/material/menu'; // Menu
+
+// ====== Importacion de layout breakpoint (no es de materia design). (Recomendado)
+// import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [],
@@ -24,7 +28,8 @@ import { MatGridListModule } from '@angular/material/grid-list'; // grid.
     MatIconModule,
     MatListModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    MatMenuModule
   ],
   exports: [
     MatSliderModule,
@@ -35,7 +40,8 @@ import { MatGridListModule } from '@angular/material/grid-list'; // grid.
     MatIconModule,
     MatListModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    MatMenuModule
   ]
 })
 export class MaterialModule { }

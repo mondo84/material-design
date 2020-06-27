@@ -1,30 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
+// media query material design.
 import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layout';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
+  layoutChanges$: Subscription; // Contiene la suscripcion de un observable.
   public columns = 4;
-  // public isMobile = false;
 
-  constructor(private breakpointObserver: BreakpointObserver, mediaMatcher: MediaMatcher) {
-    this.breakpointsGrid();
+  constructor( private breakpointObserver: BreakpointObserver ) {
   }
 
   ngOnInit(): void {
+    this.breakpointsGrid();
   }
 
+  ngOnDestroy(): void {
+    this.layoutChanges$.unsubscribe();
+  }
+
+  // ====== Puntos de ruptura del grid
   breakpointsGrid() {
      // const isSmallScreen = breakpointObserver.isMatched('(max-width: 599px)');
-    const layoutChanges$ = this.breakpointObserver.observe([
-      Breakpoints.XSmall, // Mobile
-      Breakpoints.Small,  // Mobile
-      Breakpoints.Medium  // Table
+     this.layoutChanges$ = this.breakpointObserver.observe([
+      Breakpoints.XSmall, Breakpoints.Small, Breakpoints.Medium // Mobile, Mobile, Table
     ]).subscribe({
       next: (res) => {
         // console.log(res);
@@ -44,7 +49,7 @@ export class HomeComponent implements OnInit {
         // this.isMobile ? this.columns = 1 : this.columns = 4;
       },
       error: (err) => console.error(err.message),
-      complete: () => { layoutChanges$.unsubscribe(); }
+      complete: () => { }
     });
   }
 }

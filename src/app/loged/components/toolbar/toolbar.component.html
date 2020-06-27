@@ -1,3 +1,55 @@
-<mat-toolbar class="toolbar-header" >
-  <button mat-icon-button (click)="toggleSidebarAction()"><mat-icon>menu</mat-icon></button>
+<mat-toolbar class="navbar mat-elevation-z5" >
+
+  <!-- Fila 1 de toolbar -->
+  <mat-toolbar-row  *ngIf="true">
+    <button mat-icon-button (click)="toggleSidebarAction()"><mat-icon>menu</mat-icon></button>
+
+    <div *ngIf="!extrasmall"  >
+      <button mat-button>
+        <mat-icon class="example-icon">home</mat-icon><span> Home</span>
+      </button>
+      <button mat-button>
+        <span class="material-icons example-icon">commute</span> <span> Casos</span>
+      </button>
+      <button mat-button>
+        <span class="material-icons example-icon">account_circle</span> <span> Perfil</span>
+      </button>
+    </div>
+    <span class="example-spacer"></span>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <span *ngIf="!extrasmall">Menu</span>
+      <mat-icon *ngIf="extrasmall" >more_vert</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>dialpad</mat-icon>
+        <span>Redial</span>
+      </button>
+      <button mat-menu-item disabled>
+        <mat-icon>voicemail</mat-icon>
+        <span>Check voice mail</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>notifications_off</mat-icon>
+        <span>Disable alerts</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar-row>
+
+  <!-- FIla 2 del toolbar -->
+  <mat-toolbar-row *ngIf="extrasmall" >
+    <div class="style-row-2">
+      <button mat-button>
+        <mat-icon class="example-icon">home</mat-icon> <span *ngIf="!extrasmall">Home</span>
+      </button>
+      <button mat-button>
+        <span class="material-icons example-icon">commute</span> <span *ngIf="!extrasmall">Casos</span>
+      </button>
+      <button mat-button>
+        <span class="material-icons example-icon">account_circle</span> <span *ngIf="!extrasmall">Perfil</span>
+      </button>
+    </div>
+  </mat-toolbar-row>
+
 </mat-toolbar>
