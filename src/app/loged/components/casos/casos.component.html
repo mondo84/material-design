@@ -1,231 +1,179 @@
 
-<div class="grid-container" >
-    <mat-card>
-      <mat-card-content>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, ipsa.
-      </mat-card-content>
-      <mat-card-actions>
-        <span class="example-spacer"></span>
-        <button mat-icon-button [matMenuTriggerFor]="menu1"><mat-icon>more_vert</mat-icon></button>
-        <mat-menu #menu1="matMenu" xPosition="before">
-          <button mat-menu-item>Item 1</button>
-          <button mat-menu-item>Item 2</button>
-        </mat-menu>
-      </mat-card-actions>
-    </mat-card>
+<!-- Contenedor de lista con componentes animados con arrastre y suelte
+<div cdkDropListGroup>
 
-    <mat-card>
-      <mat-card-content>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, ipsa.
-      </mat-card-content>
+  <!-- Lista con componentes de arrastre y suelte --
+  <div cdkDropList [cdkDropListData]="columna1" (cdkDropListDropped)="drop($event)">
+    <!-- Grilla grid container --
 
-      <mat-card-actions>
-        <span class="example-spacer"></span>
-        <button mat-icon-button [matMenuTriggerFor]="menu2"><mat-icon>more_vert</mat-icon></button>
-        <mat-menu #menu2="matMenu" xPosition="before">
-          <button mat-menu-item>Item 1.1</button>
-          <button mat-menu-item>Item 2.1</button>
-        </mat-menu>
-      </mat-card-actions>
-    </mat-card>
+    <mat-grid-list [cols]="1" rowHeight="200px">
 
-    <mat-card>
-      <mat-card-content>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, ipsa.
-      </mat-card-content>
-      <mat-card-actions>
-        <span class="example-spacer"></span>
-        <button mat-icon-button [matMenuTriggerFor]="menu3"><mat-icon>more_vert</mat-icon></button>
-        <mat-menu #menu3="matMenu" xPosition="before">
-          <button mat-menu-item>Item 1.1</button>
-          <button mat-menu-item>Item 2.1</button>
-        </mat-menu>
-      </mat-card-actions>
-    </mat-card>
+      <!-- cdkDrag=zona arrastre | cdkDragHandle=manejador zona arrastre -->
+      <!-- Iterador de la coleccion
+      <div *ngFor="let item of columna1" style="background-color: burlywood;" >
+        <mat-card class="mat-elevation-z5" cdkDrag>
 
-    <mat-card>
-      <mat-card-content>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, ipsa.
-      </mat-card-content>
-      <mat-card-actions>
-        <span class="example-spacer"></span>
-        <button mat-icon-button [matMenuTriggerFor]="menu4"><mat-icon>more_vert</mat-icon></button>
-        <mat-menu #menu4="matMenu" xPosition="before">
-          <button mat-menu-item>Item 1.1</button>
-          <button mat-menu-item>Item 2.1</button>
-        </mat-menu>
-      </mat-card-actions>
-    </mat-card>
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title> <strong>titulo de la card</strong> </mat-panel-title>
+                <!-- <mat-panel-description>Encabezado del panel colapsable</mat-panel-description> --
+              </mat-expansion-panel-header>
+              <mat-card-content>
+                Card - {{ item }}
+                Lorem ipsum dolor sit amet consectetur
+                adipisicing elit. Minima, veritatis!
+              </mat-card-content>
+            </mat-expansion-panel>
+          </mat-accordion>
 
-    <mat-card>
-      <mat-card-content>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, ipsa.
-      </mat-card-content>
-      <mat-card-actions>
-        <span class="example-spacer"></span>
-        <button mat-icon-button [matMenuTriggerFor]="menu5"><mat-icon>more_vert</mat-icon></button>
-        <mat-menu #menu5="matMenu" xPosition="before">
-          <button mat-menu-item>Item 1.1</button>
-          <button mat-menu-item>Item 2.1</button>
-        </mat-menu>
-      </mat-card-actions>
-    </mat-card>
+          <mat-card-actions>
+            <button mat-icon-button [matMenuTriggerFor]="menucard">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menucard="matMenu">
+              <button mat-menu-item>
+                <mat-icon>dialpad</mat-icon>
+                <span>Redial</span>
+              </button>
+              <button mat-menu-item disabled>
+                <mat-icon>voicemail</mat-icon>
+                <span>Check voice mail</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>notifications_off</mat-icon>
+                <span>Disable alerts</span>
+              </button>
+            </mat-menu>
+          </mat-card-actions>
 
-    <mat-card>
-      <mat-card-content>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, ipsa.
-      </mat-card-content>
-      <mat-card-actions>
-        <span class="example-spacer"></span>
-        <button mat-icon-button [matMenuTriggerFor]="menu5"><mat-icon>more_vert</mat-icon></button>
-        <mat-menu #menu5="matMenu" xPosition="before">
-          <button mat-menu-item>Item 1.1</button>
-          <button mat-menu-item>Item 2.1</button>
-        </mat-menu>
-      </mat-card-actions>
-    </mat-card>
+        </mat-card>
+      </div> --
+      <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'#F8BBD0'">
+        <mat-card class="mat-elevation-z5" cdkDrag>
 
-    <mat-card>
-      <mat-card-content>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, ipsa.
-      </mat-card-content>
-      <mat-card-actions>
-        <span class="example-spacer"></span>
-        <button mat-icon-button [matMenuTriggerFor]="menu5"><mat-icon>more_vert</mat-icon></button>
-        <mat-menu #menu5="matMenu" xPosition="before">
-          <button mat-menu-item>Item 1.1</button>
-          <button mat-menu-item>Item 2.1</button>
-        </mat-menu>
-      </mat-card-actions>
-    </mat-card>
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title> <strong>titulo de la card</strong> </mat-panel-title>
+                <!-- <mat-panel-description>Encabezado del panel colapsable</mat-panel-description> --
+              </mat-expansion-panel-header>
+              <mat-card-content>
+                Card -
+                Lorem ipsum dolor sit amet consectetur
+                adipisicing elit. Minima, veritatis!
+              </mat-card-content>
+            </mat-expansion-panel>
+          </mat-accordion>
 
-    <mat-card>
-      <mat-card-content>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, ipsa.
-      </mat-card-content>
-      <mat-card-actions>
-        <span class="example-spacer"></span>
-        <button mat-icon-button [matMenuTriggerFor]="menu5"><mat-icon>more_vert</mat-icon></button>
-        <mat-menu #menu5="matMenu" xPosition="before">
-          <button mat-menu-item>Item 1.1</button>
-          <button mat-menu-item>Item 2.1</button>
-        </mat-menu>
-      </mat-card-actions>
-    </mat-card>
+          <mat-card-actions>
+            <button mat-icon-button [matMenuTriggerFor]="menucard">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menucard="matMenu">
+              <button mat-menu-item>
+                <mat-icon>dialpad</mat-icon>
+                <span>Redial</span>
+              </button>
+              <button mat-menu-item disabled>
+                <mat-icon>voicemail</mat-icon>
+                <span>Check voice mail</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>notifications_off</mat-icon>
+                <span>Disable alerts</span>
+              </button>
+            </mat-menu>
+          </mat-card-actions>
 
-    <mat-card>
-      <mat-card-content>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, ipsa.
-      </mat-card-content>
-      <mat-card-actions>
-        <span class="example-spacer"></span>
-        <button mat-icon-button [matMenuTriggerFor]="menu5"><mat-icon>more_vert</mat-icon></button>
-        <mat-menu #menu5="matMenu" xPosition="before">
-          <button mat-menu-item>Item 1.1</button>
-          <button mat-menu-item>Item 2.1</button>
-        </mat-menu>
-      </mat-card-actions>
-    </mat-card>
+        </mat-card>
+        <mat-card class="mat-elevation-z5" cdkDrag>
 
-    <mat-card>
-      <mat-card-content>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, ipsa.
-      </mat-card-content>
-      <mat-card-actions>
-        <span class="example-spacer"></span>
-        <button mat-icon-button [matMenuTriggerFor]="menu5"><mat-icon>more_vert</mat-icon></button>
-        <mat-menu #menu5="matMenu" xPosition="before">
-          <button mat-menu-item>Item 1.1</button>
-          <button mat-menu-item>Item 2.1</button>
-        </mat-menu>
-      </mat-card-actions>
-    </mat-card>
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title> <strong>titulo de la card</strong> </mat-panel-title>
+                <!-- <mat-panel-description>Encabezado del panel colapsable</mat-panel-description> --
+              </mat-expansion-panel-header>
+              <mat-card-content>
+                Card -
+                Lorem ipsum dolor sit amet consectetur
+                adipisicing elit. Minima, veritatis!
+              </mat-card-content>
+            </mat-expansion-panel>
+          </mat-accordion>
 
-    <mat-card>
-      <mat-card-content>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, ipsa.
-      </mat-card-content>
-      <mat-card-actions>
-        <span class="example-spacer"></span>
-        <button mat-icon-button [matMenuTriggerFor]="menu5"><mat-icon>more_vert</mat-icon></button>
-        <mat-menu #menu5="matMenu" xPosition="before">
-          <button mat-menu-item>Item 1.1</button>
-          <button mat-menu-item>Item 2.1</button>
-        </mat-menu>
-      </mat-card-actions>
-    </mat-card>
+          <mat-card-actions>
+            <button mat-icon-button [matMenuTriggerFor]="menucard">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menucard="matMenu">
+              <button mat-menu-item>
+                <mat-icon>dialpad</mat-icon>
+                <span>Redial</span>
+              </button>
+              <button mat-menu-item disabled>
+                <mat-icon>voicemail</mat-icon>
+                <span>Check voice mail</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>notifications_off</mat-icon>
+                <span>Disable alerts</span>
+              </button>
+            </mat-menu>
+          </mat-card-actions>
 
-    <mat-card>
-      <mat-card-content>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, ipsa.
-      </mat-card-content>
-      <mat-card-actions>
-        <span class="example-spacer"></span>
-        <button mat-icon-button [matMenuTriggerFor]="menu5"><mat-icon>more_vert</mat-icon></button>
-        <mat-menu #menu5="matMenu" xPosition="before">
-          <button mat-menu-item>Item 1.1</button>
-          <button mat-menu-item>Item 2.1</button>
-        </mat-menu>
-      </mat-card-actions>
-    </mat-card>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'#FFEBEE'">
+        <mat-card class="mat-elevation-z5" cdkDrag>
 
-    <mat-card>
-      <mat-card-content>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, ipsa.
-      </mat-card-content>
-      <mat-card-actions>
-        <span class="example-spacer"></span>
-        <button mat-icon-button [matMenuTriggerFor]="menu5"><mat-icon>more_vert</mat-icon></button>
-        <mat-menu #menu5="matMenu" xPosition="before">
-          <button mat-menu-item>Item 1.1</button>
-          <button mat-menu-item>Item 2.1</button>
-        </mat-menu>
-      </mat-card-actions>
-    </mat-card>
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title> <strong>titulo de la card</strong> </mat-panel-title>
+                <!-- <mat-panel-description>Encabezado del panel colapsable</mat-panel-description> --
+              </mat-expansion-panel-header>
+              <mat-card-content>
+                Card -
+                Lorem ipsum dolor sit amet consectetur
+                adipisicing elit. Minima, veritatis!
+              </mat-card-content>
+            </mat-expansion-panel>
+          </mat-accordion>
 
-    <mat-card>
-      <mat-card-content>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, ipsa.
-      </mat-card-content>
-      <mat-card-actions>
-        <span class="example-spacer"></span>
-        <button mat-icon-button [matMenuTriggerFor]="menu5"><mat-icon>more_vert</mat-icon></button>
-        <mat-menu #menu5="matMenu" xPosition="before">
-          <button mat-menu-item>Item 1.1</button>
-          <button mat-menu-item>Item 2.1</button>
-        </mat-menu>
-      </mat-card-actions>
-    </mat-card>
+          <mat-card-actions>
+            <button mat-icon-button [matMenuTriggerFor]="menucard">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menucard="matMenu">
+              <button mat-menu-item>
+                <mat-icon>dialpad</mat-icon>
+                <span>Redial</span>
+              </button>
+              <button mat-menu-item disabled>
+                <mat-icon>voicemail</mat-icon>
+                <span>Check voice mail</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>notifications_off</mat-icon>
+                <span>Disable alerts</span>
+              </button>
+            </mat-menu>
+          </mat-card-actions>
 
-    <mat-card>
-      <mat-card-content>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, ipsa.
-      </mat-card-content>
-      <mat-card-actions>
-        <span class="example-spacer"></span>
-        <button mat-icon-button [matMenuTriggerFor]="menu5"><mat-icon>more_vert</mat-icon></button>
-        <mat-menu #menu5="matMenu" xPosition="before">
-          <button mat-menu-item>Item 1.1</button>
-          <button mat-menu-item>Item 2.1</button>
-        </mat-menu>
-      </mat-card-actions>
-    </mat-card>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'#BBDEFB'">14</mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'#BBDEFB'">14</mat-grid-tile>
 
-    <mat-card>
-      <mat-card-content>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, ipsa.
-      </mat-card-content>
-      <mat-card-actions>
-        <span class="example-spacer"></span>
-        <button mat-icon-button><mat-icon>more_vert</mat-icon></button><button mat-icon-button [matMenuTriggerFor]="menu5"><mat-icon>more_vert</mat-icon></button>
-        <mat-menu #menu5="matMenu" xPosition="before">
-          <button mat-menu-item>Item 1.1</button>
-          <button mat-menu-item>Item 2.1</button>
-        </mat-menu>
-      </mat-card-actions>
-    </mat-card>
+    </mat-grid-list>
+
+  </div>
 
 </div>
+-->
+
 <!-- <div class="header">header</div>
   <div class="sidebar1">sidebar1</div>
   <div class="sidebar2">sidebar2</div>
@@ -233,3 +181,170 @@
   <div class="widgets1">widgets</div>
   <div class="footer">footer</div> -->
   <!-- <mat-card>Simple card</mat-card> -->
+
+<div class="grid-css">
+  <div class="item">
+    <div class="sub-grid">
+      <div class="sub-i">
+        <mat-card>
+          <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                alt="Photo of a Shiba Inu" style="object-fit: cover;" >
+          <mat-card-content>
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Personal data
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="contenido-card" >
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Eaque quasi fuga quibusdam labore quis delectus,
+                  perspiciatis laborum dignissimos dolores sapiente.
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </mat-card-content>
+        </mat-card>
+        <mat-card>
+          <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                alt="Photo of a Shiba Inu" style="object-fit: cover;" >
+          <mat-card-content>
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Personal data
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Eaque quasi fuga quibusdam labore quis delectus,
+                perspiciatis laborum dignissimos dolores sapiente.
+              </mat-expansion-panel>
+            </mat-accordion>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="sub-i" >
+        <mat-card>
+          <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                alt="Photo of a Shiba Inu" style="object-fit: cover;" >
+          <mat-card-content>
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Personal data
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Eaque quasi fuga quibusdam labore quis delectus,
+                perspiciatis laborum dignissimos dolores sapiente.
+              </mat-expansion-panel>
+            </mat-accordion>
+          </mat-card-content>
+        </mat-card>
+        <mat-card>
+          <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                alt="Photo of a Shiba Inu" style="object-fit: cover;" >
+          <mat-card-content>
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Personal data
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Eaque quasi fuga quibusdam labore quis delectus,
+                perspiciatis laborum dignissimos dolores sapiente.
+              </mat-expansion-panel>
+            </mat-accordion>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="sub-grid">
+      <div class="sub-i">
+        <mat-card>
+          <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                alt="Photo of a Shiba Inu" style="object-fit: cover;" >
+          <mat-card-content>
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Personal data
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Eaque quasi fuga quibusdam labore quis delectus,
+                perspiciatis laborum dignissimos dolores sapiente.
+              </mat-expansion-panel>
+            </mat-accordion>
+          </mat-card-content>
+        </mat-card>
+        <mat-card>
+          <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                alt="Photo of a Shiba Inu" style="object-fit: cover;" >
+          <mat-card-content>
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Personal data
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Eaque quasi fuga quibusdam labore quis delectus,
+                perspiciatis laborum dignissimos dolores sapiente.
+              </mat-expansion-panel>
+            </mat-accordion>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="sub-i" >
+        <mat-card>
+          <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                alt="Photo of a Shiba Inu" style="object-fit: cover;" >
+          <mat-card-content>
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Personal data
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Eaque quasi fuga quibusdam labore quis delectus,
+                perspiciatis laborum dignissimos dolores sapiente.
+              </mat-expansion-panel>
+            </mat-accordion>
+          </mat-card-content>
+        </mat-card>
+        <mat-card>
+          <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                alt="Photo of a Shiba Inu" style="object-fit: cover;" >
+          <mat-card-content>
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Personal data
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Eaque quasi fuga quibusdam labore quis delectus,
+                perspiciatis laborum dignissimos dolores sapiente.
+              </mat-expansion-panel>
+            </mat-accordion>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
