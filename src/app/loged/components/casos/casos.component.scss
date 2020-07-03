@@ -1,3 +1,4 @@
+/*
 .grid-css {
   display: grid;
   grid-template-columns: 1fr;
@@ -124,4 +125,25 @@
     }
   }
 
+}
+*/
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 1em;  // Crea 12 canales para las filas.
+  grid-auto-rows: 0;
+
+  .masonry-brick {
+    .content {
+      background-color: #4684f8;
+    }
+  }
+
+  .item:nth-child(even) {
+
+    .content {
+      background-color: #f87846;
+    }
+  }
 }
