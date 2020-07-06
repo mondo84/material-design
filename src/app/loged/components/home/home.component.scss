@@ -1,3 +1,271 @@
-mat-grid-tile {
-  // background-color: antiquewhite;
+.contenedor-grid {
+  $gap: 10px;   // Crea 12 canales para las filas. 12 canales.
+
+  display: grid;
+  grid-template-columns: repeat(1, minmax(250px, 1fr));
+  gap: $gap;
+  max-width: 1200px;
+  margin: auto;
+  // grid-template-rows: minmax(200px, auto);
+  grid-auto-rows: 0;
+  grid-auto-flow: dense;
+
+
+
+  .item {
+    grid-column: span 1;
+    grid-row-end: span 15;  // Alto de items cuando esta en small (1 columna).
+
+    display: flex;
+
+      &:hover { opacity: .800; }
+      img { width: 100%; object-fit: cover; height: 100%; }
+
+      mat-card {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        border-radius: 0;
+        padding: 4px;
+        align-content: center;
+        // height: calc(100% - 20px);
+
+          &:hover {
+            cursor: pointer;
+            color: black;
+          }
+
+          mat-card-header {
+            // background-color: crimson;
+            justify-content: center;
+            align-items: center;
+            height: auto;
+            padding-top: 10px;
+
+            mat-card-title { margin: 0; color: rgb(243, 243, 243) }
+          }
+
+          mat-card-content {
+            height: 100%;
+            .dato {
+              display: flex;
+              height: 100%;
+              justify-content: center;
+              align-items: center;
+              font-size: 60px;
+              color: rgb(4, 0, 219);
+              // background-color: rgb(226, 110, 43);
+            }
+          }
+      }
+  }
+
+  .item:first-child {
+    mat-card { background-color: #64B5F6; opacity: .950; }
+  }
+
+  .item:nth-child(2) {
+    mat-card { background-color: #B39DDB; opacity: .950; }
+  }
+
+  .item:nth-child(3),
+  .item:nth-child(4) {
+    mat-card { background-color: #7986CB; opacity: .950; }
+  }
+
+  .item:nth-child(5),
+  .item:nth-child(6) {
+    mat-card { background-color: #0288D1; opacity: .950; }
+  }
+
+  .item:last-child {
+    mat-card { background-color: #4DB6AC; opacity: .950; }
+  }
+
+  // /* Crea 4 clases columns. de 1 a 4.
+  // @for $i from 1 to $columns {
+  //   &.columns-#{$i} {
+  //     --columns: #{$i};
+  //   }
+  // }*/
+
+  @media screen and (min-width: 400px) {
+    // background-color: rgba(226, 116, 43, 0.74);
+    grid-template-columns: repeat(2, 1fr);
+
+    .item:first-child {
+      grid-column: span 2;
+      grid-row: span 15;
+    }
+
+    .item:nth-child(2) {
+      grid-row: span 25;
+    }
+
+    .item:nth-child(2),
+    .item:nth-child(6) {
+      mat-card {
+        mat-card-content {
+          .dato {
+            font-size: 80px;
+          }
+        }
+      }
+    }
+
+    .item:nth-child(6) {
+      grid-row: span 25;
+    }
+  }
+
+  @media screen and (min-width: 600px) {
+    // background-color: rgba(226, 116, 43, 0.74);
+    grid-template-columns: repeat(2, 1fr);
+
+    .item:first-child {
+      // background-color: rgba(226, 198, 43, 0.74);
+      grid-row: span 20;
+    }
+
+
+    .item:nth-child(2) {
+      // background-color: rgba(137, 43, 226, 0.74);
+      grid-row: span 35;
+      mat-card {
+        mat-card-content {
+          .dato {
+            font-size: 50px;
+          }
+        }
+      }
+    }
+
+    .item:nth-child(6) {
+      // background-color: rgba(137, 43, 226, 0.74);
+      grid-column: span 2;
+      grid-row: span 15;
+    }
+
+    .item:last-child {
+      // background-color: rgba(137, 43, 226, 0.74);
+      grid-column: span 3;
+    }
+
+    .item:nth-child(6),
+    .item:nth-child(7) {
+      mat-card {
+        mat-card-content {
+          .dato {
+            font-size: 70px;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 720px) {
+    // background-color: rgba(226, 43, 211, 0.74);
+    grid-template-columns: repeat(3, 1fr);
+
+    .item {
+      mat-card {
+        mat-card-header {
+          mat-card-title { font-size: 22px; }
+        }
+        mat-card-content {
+          .dato {
+            font-size: 80px;
+          }
+        }
+      }
+    }
+
+    .item:first-child {
+      grid-column: span 3;
+      grid-row: span 25;
+    }
+
+    .item:nth-child(2) {
+      // background-color: rgba(137, 43, 226, 0.74);
+      grid-row: span 20;
+    }
+
+    .item:nth-child(3) {
+      // background-color: rgba(211, 211, 211, 0.74);
+      grid-row: span 25;
+    }
+
+    .item:nth-child(4) {
+      grid-column: span 1;
+      grid-row: span 15;
+
+      mat-card {
+        mat-card-content {
+          .dato {
+            font-size: 60px;
+          }
+        }
+      }
+    }
+
+    .item:nth-child(5) {
+      // background-color: rgba(209, 44, 44, 0.74);
+      grid-column: span 1;
+      grid-row: span 25;
+    }
+
+    .item:nth-child(6) {
+      // background-color: rgba(211, 211, 211, 0.74);
+      grid-column: span 1;
+      grid-row: span 20;
+
+    }
+
+    .item:last-child {
+      // background-color: rgba(137, 43, 226, 0.74);
+      grid-column: span 1;
+      grid-row: span 15;
+
+      mat-card {
+        mat-card-content {
+          .dato {
+            font-size: 60px;
+          }
+        }
+      }
+    }
+
+  }
+
 }
+
+
+.scroll-lateral {
+  display: flex;
+  overflow-x: auto;
+  max-width: 1200px;
+  margin: 10px auto;
+  height: 200px;
+  padding-bottom: 10px;
+
+  mat-card {
+    min-width: 150px;
+    margin-right: 10px;
+    border-radius: 2px;
+    background-color: #64B5F6;
+
+    &:hover { opacity: .800; }
+  }
+
+  mat-card:nth-child(even) {
+    background-color: #7986CB;
+  }
+
+  mat-card:last-child {
+    min-width: 150px;
+    margin-right: 0;
+  }
+
+  // &::-webkit-scrollbar { display: none; }
+}
+
