@@ -79,7 +79,7 @@
                     background-color: #7979798d;
                     border-radius: 10px;
                     border: 2px solid #f1f2f3;
-                }
+                  }
                 }
               }
             }
@@ -126,23 +126,42 @@
 
 }
 
-
-.grid {
+.box {
+  --columns: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-gap: 1em;  // Crea 12 canales para las filas.
-  grid-auto-rows: 0;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  gap: 1rem;  // 12 pixeles;
 
   .masonry-brick {
-    .content {
-      background-color: #4684f8;
+    // background-color: #4684f8;
+    margin-bottom: 1rem;
+
+    mat-card {
+      mat-card-content {
+        mat-accordion {
+
+          mat-expansion-panel {
+            box-shadow: none;
+            ::ng-deep .mat-expansion-panel-content {
+              .mat-expansion-panel-body {
+                padding: 0;
+              }
+            }
+
+            .contenido-card {
+              height: 80px;
+              overflow-y: auto;
+            }
+
+          }
+        }
+      }
     }
   }
 
-  .item:nth-child(even) {
-
-    .content {
-      background-color: #f87846;
+  @for $i from 1 to 7 {
+    &.columns-#{$i} {
+      --columns: #{$i};
     }
   }
 }

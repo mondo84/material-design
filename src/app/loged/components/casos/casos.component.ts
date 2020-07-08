@@ -14,51 +14,92 @@ export class CasosComponent implements OnInit, AfterViewInit {
 
   @ViewChild('gridContainer', {static: true}) gridContainer: ElementRef;
   @ViewChildren('masonryBrick') masonryBrick: QueryList<any>;
-  @ViewChildren('masonryContent') masonryContent: QueryList<any>;
-
-  // @ViewChildren('item') item: QueryList<any>;
 
   panelOpenState = false;
-  columna1: any [] = [1, 2, 3, 4, 5];
-  // columna2: any [] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  datos = [
+    { titulo: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.` },
+    { titulo:  `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.` },
+    { titulo: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.` },
+    { titulo: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.` },
+    { titulo: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
+    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel.` }
+  ];
 
   constructor(private objMediaQuery: BreakpointObserver,
-              private renderer: Renderer2) {
+              private r2: Renderer2) {
   }
 
   ngOnInit(): void {
+    /*
     this.objMediaQuery.observe([ Breakpoints.Small ]).subscribe({
       next: (res) => {
-        console.log(res.matches);
+        // console.log(res.matches);
       },
       error: (err) => { console.error(err.message); }
-    });
+    });*/
   }
 
   ngAfterViewInit() {
-    // console.log(this.masonryBrick);
-    for (let x = 0; x < this.masonryBrick.length; x++){
-      this.resizeGridItem(this.masonryBrick[`_results`][x][`nativeElement`]);  // Obtiene todos los elementos con referencia #item del grid.
+    const arregloNuevo = [];
+    for (let c = 0; c < this.masonryBrick[`_results`].length; c++) {
+      arregloNuevo [c] = this.masonryBrick[`_results`][c][`nativeElement`];
     }
+    this.mansory(this.gridContainer.nativeElement, arregloNuevo, 2);
   }
 
-  resizeGridItem(item: any) {
-    // console.log(item[`children`][0]);
+  mansory(grid: any, itemsElemet: string | any[], columns: number) {
+  //  mansory(grid: any, itemsElemet: any, columns: number) {
 
-    // console.log(this.gridContainer.nativeElement);
-    // tslint:disable-next-line: radix
-    const rowGap = parseInt( window.getComputedStyle(this.gridContainer.nativeElement).getPropertyValue('grid-row-gap') );  // 10px
-    // tslint:disable-next-line: radix
-    const rowHeight = parseInt( window.getComputedStyle(this.gridContainer.nativeElement).getPropertyValue('grid-auto-rows') ); // 40px
-    // const rowSpan = Math.ceil( (item.getBoundingClientRect().height + rowGap ) / (rowHeight + rowGap) );
-    const rowSpan = Math.ceil( (item[`children`][0].getBoundingClientRect().height + rowGap ) / (rowHeight + rowGap) );
-    // console.log(rowSpan);
-    item.style.gridRowEnd = 'span ' + rowSpan;  // Ajusta el final de la fila en la grilla.
+    this.r2.addClass(grid, 'box');
+    this.r2.addClass(grid, `columns-${columns}`);
+
+    const columnsElements: Array<HTMLElement> = []; // Seran las columnas que se crearan en el array.
+
+    for (let i = 1; i <= columns; i++) {            // Crea n columnas como sea pasadas por el parametro "columns"
+      const column = this.r2.createElement('div');  // Crea los div que haran de columna.
+      this.r2.addClass(column, 'masonry-column');   // Se agrega la clase a las columnas creadas.
+      this.r2.addClass(column,  `column-${i}`);     // Se agrega la clase de las columnas creadas.
+      this.r2.appendChild(grid, column);            // Se agregan las columnas creadas al la Grilla.
+      columnsElements.push(column);                 // se agregan las columnas al arreglo de los elementos.
+    }
+
+    // cantidad de filas a recorrer internamente = cantidad de items / columnas
+    for (let column = 0; column < Math.ceil( itemsElemet.length / columns); column++ ) {  // Recorre columnas
+      for (let row = 0; row < columns; row++) {  // recorre cada fila en cada iteracion de columna.
+        // const item = itemsElemet[(column * columns) + row][`nativeElement`];  // Se obtiene cada item hijo.
+        const item = itemsElemet[(column * columns) + row]; // 1 Se recupera el ultimo hijo de cada fila.
+        columnsElements[row].appendChild(item);             // 2 Se coloca cada item como hijo de cada columna.
+      }
+    }
   }
 
   drop(event: CdkDragDrop<string[]>) {
     // Mueve un elemento de un indice en un array. // Indice seleccionado, // indice actua indicado
-    moveItemInArray(this.columna1, event.previousIndex, event.currentIndex);
+    // moveItemInArray(this.columna1, event.previousIndex, event.currentIndex);
   }
 
 }
