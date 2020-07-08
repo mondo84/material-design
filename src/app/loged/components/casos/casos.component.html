@@ -1,25 +1,30 @@
-<div #gridContainer id="box" class="gallery">
+<div #gridContainer id="box" class="gallery"> <!-- Grid css -->
 
+  <!-- Items del grid -->
   <div #masonryBrick class="masonry-brick" *ngFor="let item of datos">
+
     <div class="content">
-      <mat-card>
-        <mat-card-content>
-          <mat-accordion>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
+
+      <mat-card>                            <!-- Card -->
+        <mat-card-content>                  <!-- Contenido Card -->
+          <mat-accordion>                   <!-- Accorion -->
+            <mat-expansion-panel>           <!-- Panel expandible -->
+              <mat-expansion-panel-header>  <!-- Encabezado del panel expandible -->
                 <mat-panel-title>
-                  Personal data
+                  {{item.titulo}}
                 </mat-panel-title>
               </mat-expansion-panel-header>
 
-              <div class="contenido-card" >
-                {{item.titulo}}
+              <div class="contenido-card" > <!-- Contenido del panel expandible -->
+                {{item.contenido}}
               </div>
             </mat-expansion-panel>
           </mat-accordion>
         </mat-card-content>
       </mat-card>
+
     </div>
+
   </div>
 
 </div>

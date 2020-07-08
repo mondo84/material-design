@@ -17,36 +17,10 @@ export class CasosComponent implements OnInit, AfterViewInit {
 
   panelOpenState = false;
   datos = [
-    { titulo: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.` },
-    { titulo:  `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.` },
-    { titulo: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.` },
-    { titulo: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.` },
-    { titulo: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, doloremque.
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel.` }
+    { titulo: `En Ruta`, contenido: 'tabla' },
+    { titulo: `En Muelle`, contenido: 'tabla' },
+    { titulo: `En mantenimiento`, contenido: 'tabla' },
+    { titulo: `Fuera de servicio`, contenido: 'tabla' }
   ];
 
   constructor(private objMediaQuery: BreakpointObserver,
@@ -65,16 +39,16 @@ export class CasosComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     const arregloNuevo = [];
-    for (let c = 0; c < this.masonryBrick[`_results`].length; c++) {
-      arregloNuevo [c] = this.masonryBrick[`_results`][c][`nativeElement`];
+    for (let c = 0; c < this.masonryBrick[`_results`].length; c++) {        // itera sobre los items del grid
+      arregloNuevo[c] = this.masonryBrick[`_results`][c][`nativeElement`];  // Pasa los items a un array.
     }
-    this.mansory(this.gridContainer.nativeElement, arregloNuevo, 2);
+    this.mansory(this.gridContainer.nativeElement, arregloNuevo, 2);  // Pasa el grid, los items y la cantidad de comulas.
   }
 
   mansory(grid: any, itemsElemet: string | any[], columns: number) {
   //  mansory(grid: any, itemsElemet: any, columns: number) {
 
-    this.r2.addClass(grid, 'box');
+    this.r2.addClass(grid, 'gridCss');
     this.r2.addClass(grid, `columns-${columns}`);
 
     const columnsElements: Array<HTMLElement> = []; // Seran las columnas que se crearan en el array.
@@ -92,7 +66,12 @@ export class CasosComponent implements OnInit, AfterViewInit {
       for (let row = 0; row < columns; row++) {  // recorre cada fila en cada iteracion de columna.
         // const item = itemsElemet[(column * columns) + row][`nativeElement`];  // Se obtiene cada item hijo.
         const item = itemsElemet[(column * columns) + row]; // 1 Se recupera el ultimo hijo de cada fila.
-        columnsElements[row].appendChild(item);             // 2 Se coloca cada item como hijo de cada columna.
+        // console.log(item);
+        if (item === undefined) { // Si el item viene indefinido por no hay mas items hijos, termina el for.
+          break;
+        } else {  // Si no esta indefinido entonces agregas el item como hijo del indice, al array.
+          columnsElements[row].appendChild(item);
+        }
       }
     }
   }
