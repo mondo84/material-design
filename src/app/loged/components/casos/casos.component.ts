@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef, QueryList, ViewChildren, AfterViewInit, Renderer2 } from '@angular/core';
 
 // Arrastrar y soltar.
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 // Media query.
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Router } from '@angular/router';
+import { ServiceCasoService } from './service-caso.service';
 
 @Component({
   selector: 'app-casos',
@@ -12,19 +14,19 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 })
 export class CasosComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('gridContainer', {static: true}) gridContainer: ElementRef;
-  @ViewChildren('masonryBrick') masonryBrick: QueryList<any>;
+  // @ViewChild('grilla', {static: true}) grilla: ElementRef;
+  // @ViewChildren('columnas') columnas: QueryList<any>;
 
+  columna: number;
   panelOpenState = false;
-  datos = [
-    { titulo: `En Ruta`, contenido: 'tabla' },
-    { titulo: `En Muelle`, contenido: 'tabla' },
-    { titulo: `En mantenimiento`, contenido: 'tabla' },
-    { titulo: `Fuera de servicio`, contenido: 'tabla' }
-  ];
+  datos = [];
+  lista1 = [];
+  lista2 = [];
+  lista3 = [];
 
   constructor(private objMediaQuery: BreakpointObserver,
-              private r2: Renderer2) {
+              private r2: Renderer2, private route: Router,
+              private sC: ServiceCasoService) {
   }
 
   ngOnInit(): void {
@@ -35,45 +37,48 @@ export class CasosComponent implements OnInit, AfterViewInit {
       },
       error: (err) => { console.error(err.message); }
     });*/
+    this.cargaLista();
+  }
+
+  cargaLista(){
+    this.datos = this.sC.getDatos();  // 4 Registros
   }
 
   ngAfterViewInit() {
-    const arregloNuevo = [];
-    for (let c = 0; c < this.masonryBrick[`_results`].length; c++) {        // itera sobre los items del grid
-      arregloNuevo[c] = this.masonryBrick[`_results`][c][`nativeElement`];  // Pasa los items a un array.
-    }
-    this.mansory(this.gridContainer.nativeElement, arregloNuevo, 2);  // Pasa el grid, los items y la cantidad de comulas.
-  }
 
-  mansory(grid: any, itemsElemet: string | any[], columns: number) {
-  //  mansory(grid: any, itemsElemet: any, columns: number) {
+    this.objMediaQuery.observe([
+      Breakpoints.HandsetPortrait,
+      Breakpoints.Small,
+      Breakpoints.Medium
+    ]).subscribe({
+      next: async (res) => {
+        const xs = res[`breakpoints`][`(max-width: 599.99px) and (orientation: portrait)`];
+        const sm = res[`breakpoints`][`(min-width: 600px) and (max-width: 959.99px)`];
+        const md = res[`breakpoints`][`(min-width: 960px) and (max-width: 1279.99px)`];
+        const aux = await this.sC.getDatos();
 
-    this.r2.addClass(grid, 'gridCss');
-    this.r2.addClass(grid, `columns-${columns}`);
+        if ( xs ) {
+          // const aux = this.sC.getDatos();
+          this.lista2 = [];
+          this.lista3 = [];
+          this.lista1 = aux;
 
-    const columnsElements: Array<HTMLElement> = []; // Seran las columnas que se crearan en el array.
+        } else if (sm) {
+          const itemsPorColumna = await Math.ceil( this.sC.getDatos().length / 2 );  // Divide registros entre 2 columnas.
+          this.lista3 = [];
+          this.lista1 = await aux.slice(0, itemsPorColumna);
+          this.lista2 = await aux.slice(itemsPorColumna);
 
-    for (let i = 1; i <= columns; i++) {            // Crea n columnas como sea pasadas por el parametro "columns"
-      const column = this.r2.createElement('div');  // Crea los div que haran de columna.
-      this.r2.addClass(column, 'masonry-column');   // Se agrega la clase a las columnas creadas.
-      this.r2.addClass(column,  `column-${i}`);     // Se agrega la clase de las columnas creadas.
-      this.r2.appendChild(grid, column);            // Se agregan las columnas creadas al la Grilla.
-      columnsElements.push(column);                 // se agregan las columnas al arreglo de los elementos.
-    }
-
-    // cantidad de filas a recorrer internamente = cantidad de items / columnas
-    for (let column = 0; column < Math.ceil( itemsElemet.length / columns); column++ ) {  // Recorre columnas
-      for (let row = 0; row < columns; row++) {  // recorre cada fila en cada iteracion de columna.
-        // const item = itemsElemet[(column * columns) + row][`nativeElement`];  // Se obtiene cada item hijo.
-        const item = itemsElemet[(column * columns) + row]; // 1 Se recupera el ultimo hijo de cada fila.
-        // console.log(item);
-        if (item === undefined) { // Si el item viene indefinido por no hay mas items hijos, termina el for.
-          break;
-        } else {  // Si no esta indefinido entonces agregas el item como hijo del indice, al array.
-          columnsElements[row].appendChild(item);
+        } else if (md){
+          const itemsPorColumna = await Math.ceil( this.sC.getDatos().length / 3 );  // Divide registros entre 3 columnas.
+          this.lista1 = await aux.slice(0, itemsPorColumna);  // primer listado. 0 a 3
+          this.lista2 = await aux.slice(itemsPorColumna, itemsPorColumna + itemsPorColumna); // del medio
+          this.lista3 = await aux.slice(itemsPorColumna + itemsPorColumna); // tercer listado. del resto al final
         }
-      }
-    }
+      },
+      error: (err) => { console.error(err.message); }
+    });
+
   }
 
   drop(event: CdkDragDrop<string[]>) {

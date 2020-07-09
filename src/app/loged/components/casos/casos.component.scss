@@ -36,5 +36,63 @@
       --columns: #{$i};
     }
   }
+
+  @media screen and (min-width: 599.99px) {
+    --columns: 2;
+    // background-color: #5a16f7;
+    // grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (min-width: 959.99px) {
+    --columns: 3;
+    // grid-template-columns: repeat(3, 1fr);
+  }
 }
 
+.grilla {
+  --columns: 1;
+  display: grid;
+  // background-color: orange;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  gap: 5px;  // 12 pixeles;
+
+  .columnas {
+    // background-color: rgb(125, 166, 255);
+    .item {
+      width: 100%;
+      word-break: break-all;
+      margin-bottom: 5px;
+
+      mat-card {
+        mat-card-content {
+          mat-accordion {
+
+            mat-expansion-panel {
+              box-shadow: none;
+              ::ng-deep .mat-expansion-panel-content {
+                .mat-expansion-panel-body {
+                  padding: 0;
+                }
+              }
+
+              .contenido-card {
+                height: 80px;
+                overflow-y: auto;
+              }
+
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+  @media screen and (min-width: 599.99px) {
+    --columns: 2;
+  }
+
+  @media screen and (min-width: 959.99px) {
+    --columns: 3;
+  }
+}

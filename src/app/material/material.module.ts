@@ -13,6 +13,7 @@ import { MatCardModule } from '@angular/material/card';       // Card.
 import { MatGridListModule } from '@angular/material/grid-list';  // grid.
 import { MatMenuModule } from '@angular/material/menu';           // Menu.
 import { MatExpansionModule } from '@angular/material/expansion'; // Collapse.
+import { MatTableModule } from '@angular/material/table';         // Tabla.
 
 // ====== Importaciones de CDK material design
 import { CdkScrollableModule } from '@angular/cdk/scrolling'; // Contenedor con scroll
@@ -39,7 +40,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     CdkScrollableModule,
     DragDropModule,
     MatExpansionModule,
-    LayoutModule
+    LayoutModule,
+    MatTableModule
   ],
   exports: [
     MatSliderModule,
@@ -55,7 +57,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     CdkScrollableModule,
     DragDropModule,
     MatExpansionModule,
-    LayoutModule
+    LayoutModule,
+    MatTableModule
   ]
 })
 export class MaterialModule { }
