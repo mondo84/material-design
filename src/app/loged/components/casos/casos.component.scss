@@ -1,98 +1,144 @@
-.gridCss {
-  --columns: 1;
+.grid-containerr {
   display: grid;
-  grid-template-columns: repeat(var(--columns), 1fr);
-  gap: 1rem;  // 12 pixeles;
+  max-width: 1200px;
+  margin: auto;
+  grid-template-columns: 1fr;
+  gap: 4px;
+  grid-auto-rows: 120px;
+  margin-bottom: 10px;
 
-  .masonry-brick {
-    // background-color: #4684f8;
-    margin-bottom: 1rem;
+    .celda {
+      max-width: 100%;
+      // background-color: #ff4fff;
 
-    mat-card {
-      mat-card-content {
-        mat-accordion {
+      mat-card {
+        border-radius: 2px;
+        flex-direction: column;
+        padding: 0;
+        margin-bottom: 0;
+        height: 100%;
 
-          mat-expansion-panel {
-            box-shadow: none;
-            ::ng-deep .mat-expansion-panel-content {
-              .mat-expansion-panel-body {
-                padding: 0;
-              }
+        &:hover { opacity: 1; cursor: default; }
+
+        mat-card-content {
+          // width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: row;
+        }
+        .foto{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100px;
+          background-color: #0040b8e1;
+        }
+
+        .contenido {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          background-color: #f0f0f0a4;
+          padding-top: 8px;
+          padding-left: 4px;
+          flex: 1;
+
+          div { font-size: 12px; letter-spacing: 1px; color: #414141; word-spacing: 4px; }
+
+          .detalle {
+            position: absolute;
+            bottom: 9px;
+            right: 10px;
+
+            .button {
+              width: 35px;
+              height: 36px;
+              box-shadow: 0 6px 6px -2px #0000008e;
             }
-
-            .contenido-card {
-              height: 80px;
-              overflow-y: auto;
-            }
-
           }
         }
       }
-    }
-  }
 
-  @for $i from 1 to 7 {
-    &.columns-#{$i} {
-      --columns: #{$i};
     }
-  }
+
+    .relleno {
+      display: block;
+      // background-color: #72aef1;
+      background-image: url('../../../../assets/img/fondoRelleno.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      box-shadow: 0 6px 6px -2px #0000008e;
+      position: relative;
+
+      .container-boton {
+        display: inline-block;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+
+        .btn{
+          margin-right: 4px;
+          min-width: 50px;
+          width: 50px;
+          height: 35px;
+          opacity: .850;
+          background-color: #018debaf;
+          padding: 0;
+          box-shadow: 0 6px 6px -2px #0000008e;
+          color: #f8f8f8e3;
+          transition: scale 150ms linear, background-color 250ms linear;
+
+          &:hover { background-color: #018deb; }
+          &:active { scale: .900; }
+        }
+
+        .btn-circle {
+          width: 35px;
+          height: 36px;
+          // opacity: .850;
+          background-color: #00be4faf;
+          box-shadow: 0 6px 6px -2px #0000008e;
+          transition: scale 150ms linear, background-color 250ms linear;
+          &:hover { background-color: #00be4f; }
+          &:active { scale: .950; }
+        }
+      }
+    }
 
   @media screen and (min-width: 599.99px) {
-    --columns: 2;
-    // background-color: #5a16f7;
-    // grid-template-columns: repeat(2, 1fr);
-  }
+    grid-template-columns: 300px 1fr;
 
-  @media screen and (min-width: 959.99px) {
-    --columns: 3;
-    // grid-template-columns: repeat(3, 1fr);
+    .celda {
+
+      mat-card { min-width: 250px; }
+      // .relleno { width: 50px; }
+    }
   }
 }
 
-.grilla {
-  --columns: 1;
+
+
+
+/*******************************************/
+.tables-container {
   display: grid;
-  // background-color: orange;
-  grid-template-columns: repeat(var(--columns), 1fr);
-  gap: 5px;  // 12 pixeles;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 10px;
+  // grid-auto-rows: min-content;
 
-  .columnas {
-    // background-color: rgb(125, 166, 255);
-    .item {
+  .celda {
+    // background-color: #4f6cff;
+    table {
       width: 100%;
-      word-break: break-all;
-      margin-bottom: 5px;
-
-      mat-card {
-        mat-card-content {
-          mat-accordion {
-
-            mat-expansion-panel {
-              box-shadow: none;
-              ::ng-deep .mat-expansion-panel-content {
-                .mat-expansion-panel-body {
-                  padding: 0;
-                }
-              }
-
-              .contenido-card {
-                height: 80px;
-                overflow-y: auto;
-              }
-
-            }
-          }
-        }
-      }
     }
+  }
+
+  .relleno {
 
   }
 
   @media screen and (min-width: 599.99px) {
-    --columns: 2;
-  }
+    grid-template-columns: repeat(2, 1fr);
 
-  @media screen and (min-width: 959.99px) {
-    --columns: 3;
   }
 }

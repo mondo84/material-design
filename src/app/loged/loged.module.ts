@@ -9,6 +9,7 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';  // C
 import { ToolbarComponent } from './components/toolbar/toolbar.component';  // Toolbar
 import { HomeComponent } from './components/home/home.component';
 import { CasosComponent } from './components/casos/casos.component';
+import { ModalNewComponent } from './components/modales/modal-new/modal-new.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { CasosComponent } from './components/casos/casos.component';
     SidenavComponent,
     ToolbarComponent,
     HomeComponent,
-    CasosComponent],
+    CasosComponent,
+    ModalNewComponent],
   imports: [
     CommonModule,
     LogedRoutingModule,
