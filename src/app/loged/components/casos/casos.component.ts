@@ -10,6 +10,16 @@ import { ServiceCasoService } from './service-caso.service';
 // Modal de material design
 import { MatDialog } from '@angular/material/dialog';
 import { ModalNewComponent } from '../modales/modal-new/modal-new.component';
+import { Observable, Observer } from 'rxjs';
+
+// Paginador Material design
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+
+export interface TabsI {
+  label: string;
+  content: string;
+}
 
 @Component({
   selector: 'app-casos',
@@ -18,19 +28,36 @@ import { ModalNewComponent } from '../modales/modal-new/modal-new.component';
 })
 export class CasosComponent implements OnInit, AfterViewInit {
 
-  // @ViewChild('grilla', {static: true}) grilla: ElementRef;
-  // @ViewChildren('columnas') columnas: QueryList<any>;
   columna: number;
   panelOpenState = false;
-  datos = [];
-  lista1 = [];
-  lista2 = [];
-  lista3 = [];
 
-  displayedColumns: string[] = ['ID', 'nombre'];
-  dataSource = [
-    { id: 1, nombre: 'Yesid'}
+  // displayedColumns: string[] = ['ID', 'Nombre'];
+  displayedColumns: string[] = ['titulo', 'contenido'];
+  columnas = [
+    { titulo: 'ID', name: 'titulo'},
+    { titulo: 'Nombre', name: 'contenido'}
   ];
+
+  datos: any [] = [];
+  /*
+  collectionData: any [] = [
+    { columna1: 1, columna2: 'Yesid'},
+    { columna1: 2, columna2: 'Enrique'},
+    { columna1: 3, columna2: 'Davila'},
+    { columna1: 4, columna2: 'Sierra'},
+    { columna1: 1, columna2: 'Yesid'},
+    { columna1: 2, columna2: 'Enrique'},
+    { columna1: 3, columna2: 'Davila'},
+    { columna1: 4, columna2: 'Sierra'},
+    { columna1: 1, columna2: 'Yesid'},
+    { columna1: 2, columna2: 'Enrique'}
+  ];*/
+
+  // dataSource = new MatTableDataSource<any>(this.datos);
+  dataSource: MatTableDataSource<any>;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
+  listaTabs: Observable<TabsI[]>; // Listado de tabs.
 
   constructor(private objMediaQuery: BreakpointObserver,
               private r2: Renderer2, private route: Router,
@@ -38,43 +65,27 @@ export class CasosComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.cargaTabs();
+    this.cargaLista();
+    this.dataSource = new MatTableDataSource<any>(this.datos); // Se instancia el data source y se cargan los datos.
+    this.dataSource.paginator = this.paginator; // Se relaciona el paginador con los datos de la tabla
+    // this.dataSource.sort() = this.sort;      // Se agrega el sort a la tabla.
+  }
 
-    this.objMediaQuery.observe([
-      Breakpoints.HandsetPortrait,
-      Breakpoints.Small,
-      Breakpoints.Medium
-    ]).subscribe({
-      next: async (res) => {
-        this.cargaLista();
-        const xs = res[`breakpoints`][`(max-width: 599.99px) and (orientation: portrait)`];
-        const sm = res[`breakpoints`][`(min-width: 600px) and (max-width: 959.99px)`];
-        const md = res[`breakpoints`][`(min-width: 960px) and (max-width: 1279.99px)`];
-        const aux = await this.sC.getDatos();
-
-        if ( xs ) {
-          // const aux = this.sC.getDatos();
-          this.lista2 = [];
-          this.lista3 = [];
-          this.lista1 = aux;
-
-        } else if (sm) {
-          const itemsPorColumna = await Math.ceil( this.sC.getDatos().length / 2 );  // Divide registros entre 2 columnas.
-          // this.lista3 = [];
-          this.lista1 = await aux.slice(0, itemsPorColumna);
-          this.lista2 = await aux.slice(itemsPorColumna);
-
-        } else {
-          const itemsPorColumna = await Math.ceil( this.sC.getDatos().length / 2 );  // Divide registros entre 2 columnas.
-          // this.lista3 = [];
-          this.lista1 = await aux.slice(0, itemsPorColumna);
-          this.lista2 = await aux.slice(itemsPorColumna);
-        }
-      },
-      error: (err) => { console.error(err.message); }
+  cargaTabs() {
+    this.listaTabs = new Observable((observer: Observer<TabsI[]>) => {
+      setTimeout(() => {
+        observer.next([
+          { label: 'En Ruta',   content: 'Vehiculos circulando'},
+          { label: 'En Muelle', content: 'Vehiculos en planta'},
+          { label: 'En Taller', content: 'Vehiculos en reparacion'},
+        ]);
+      }, 3000);
     });
   }
 
   cargaLista(){
+    // = new MatTableDataSource<any>(this.datos)
     this.datos = this.sC.getDatos();  // 4 Registros
   }
 

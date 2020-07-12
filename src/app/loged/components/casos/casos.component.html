@@ -1,6 +1,7 @@
 <div class="grid-containerr" >
   <div class="celda" >
-    <mat-card class="mat-elevation-z6">
+
+    <!-- <mat-card class="mat-elevation-z6">
       <mat-card-content>
         <div class="foto" >
           foto
@@ -26,12 +27,35 @@
         </div>
         <div style="display: flex; justify-content: center; align-items: center; width: 100%;" *ngIf="false"  >No hay caso abierto</div>
       </mat-card-content>
+    </mat-card> -->
+
+    <mat-card class="mat-elevation-z5">
+      <div class="header-card">
+          <div class="content-header-card" >
+            <div class="titulo" >Camila Hernandez</div>
+            <div class="sub-titulo" >Cargo: Conductor</div>
+            <div class="sub-titulo2" >Origen: Barraquilla</div>
+          </div>
+
+          <button class="btn-circle" mat-mini-fab color="primary" (click)="openDialog()">
+            <span class="material-icons" >more_vert</span>
+          </button>
+      </div>
+      <mat-card-content>
+        <!-- <mat-card-content style="font-size: 10px; padding: 0; margin: 0; background-color: rgb(80, 72, 187); "> -->
+        <div class="contenido">
+          camila@gmail.com
+        </div>
+
+        <img src="./../../../../assets/img/mujer.jpg" alt="">
+      </mat-card-content>
+
     </mat-card>
   </div>
 
   <div class="relleno" >
     <div class="container-boton" >
-      <button class="btn" mat-raised-button >Nuevo</button>
+      <button class="btn my-custom-button" mat-raised-button >Nuevo</button>
       <button class="btn" mat-raised-button >Item 2</button>
       <button class="btn" mat-raised-button >Nuevo</button>
       <button class="btn-circle" mat-mini-fab >+</button>
@@ -39,41 +63,62 @@
   </div>
 </div>
 
-las tablas las colocamos en un panel deslizable de material design
-<div class="tables-container" >
-  <div class="celda" >
+<!-- Oculta el mensaje, mientras se cargan las listas de manera asincrona
+<ng-container *ngIf="(listaTabs | async) === null">
+  <!-- Cargando listas...
+    <mat-spinner [diameter]="40" [strokeWidth]="3" mode="indeterminate"></mat-spinner>
+</ng-container> -->
+
+<mat-tab-group>
+  <!-- <mat-tab *ngFor="let tab of listaTabs | async">
+    <ng-template mat-tab-label>{{tab.label}}</ng-template>
+    {{tab.content}}
+  </mat-tab> -->
+
+  <mat-tab class="mat-elevation-z8">
+    <ng-template mat-tab-label>En Ruta</ng-template>
+
+      <div class="container-tabla mat-elevation-z8" >
+        <table mat-table [dataSource]="dataSource">
+          <!-- Columna y iteracion de los items -->
+          <ng-container *ngFor="let columna of columnas;"  matColumnDef="{{columna.name}}">
+            <th mat-header-cell *matHeaderCellDef> {{ columna.titulo }} </th>
+            <td mat-cell *matCellDef="let item"> {{ item[columna.name] }} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>  <!-- Encabezado pegajoso -->
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+      <mat-paginator
+        style="margin-top: 30px; max-width: 500px; margin-left: auto; margin-right: 30px;"
+        [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>En Muelle</ng-template>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <!-- Columna y iteracion de los items -->
-      <ng-container matColumnDef="ID">
-        <th mat-header-cell *matHeaderCellDef> Caso </th>
-        <td mat-cell *matCellDef="let item"> {{item.id}}</td>
+      <ng-container *ngFor="let columna of columnas;"  matColumnDef="{{columna.name}}">
+        <th mat-header-cell *matHeaderCellDef> {{ columna.titulo }} </th>
+        <td mat-cell *matCellDef="let item"> {{ item[columna.name] }} </td>
       </ng-container>
-
-      <ng-container matColumnDef="nombre">
-        <th mat-header-cell *matHeaderCellDef> Nombre </th>
-        <td mat-cell *matCellDef="let item"> {{item.nombre}} </td>
-      </ng-container>
-
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-  </div>
+  </mat-tab>
 
-  <div class="celda" >
+  <mat-tab>
+    <ng-template mat-tab-label>En Taller</ng-template>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <!-- Columna y iteracion de los items -->
-      <ng-container matColumnDef="ID">
-        <th mat-header-cell *matHeaderCellDef> Caso </th>
-        <td mat-cell *matCellDef="let item"> {{item.id}}</td>
+      <ng-container *ngFor="let columna of columnas;"  matColumnDef="{{columna.name}}">
+        <th mat-header-cell *matHeaderCellDef> {{ columna.titulo }} </th>
+        <td mat-cell *matCellDef="let item"> {{ item[columna.name] }} </td>
       </ng-container>
-
-      <ng-container matColumnDef="nombre">
-        <th mat-header-cell *matHeaderCellDef> Nombre </th>
-        <td mat-cell *matCellDef="let item"> {{item.nombre}} </td>
-      </ng-container>
-
+      <!-- Columna y iteracion de los items -->
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-  </div>
-</div>
+  </mat-tab>
+</mat-tab-group>
+

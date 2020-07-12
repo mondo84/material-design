@@ -14,7 +14,6 @@ export class ServiceCasoService {
       { titulo: `En Muelle`, contenido: 'datos tabla 2' },
       { titulo: `En Taller`, contenido: 'datos tabla 3' },
       { titulo: `Fuera de servicio`, contenido: `datos tabla 4` },
-
     ];
 
     return datos;
