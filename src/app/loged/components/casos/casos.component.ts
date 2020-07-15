@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, QueryList, ViewChildren, AfterViewInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, QueryList, ViewChildren, AfterViewInit, Renderer2, ViewEncapsulation } from '@angular/core';
 
 // Arrastrar y soltar.
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
@@ -24,7 +24,9 @@ export interface TabsI {
 @Component({
   selector: 'app-casos',
   templateUrl: './casos.component.html',
-  styleUrls: ['./casos.component.scss']
+  styleUrls: ['./casos.component.scss'],
+  // Rompe la encapsulacion de los estilos por defecto del tooltip de material design
+  encapsulation: ViewEncapsulation.None
 })
 export class CasosComponent implements OnInit, AfterViewInit {
 
@@ -32,26 +34,14 @@ export class CasosComponent implements OnInit, AfterViewInit {
   panelOpenState = false;
 
   // displayedColumns: string[] = ['ID', 'Nombre'];
-  displayedColumns: string[] = ['titulo', 'contenido'];
+  displayedColumns: string[] = ['id', 'origen', 'destino'];
   columnas = [
-    { titulo: 'ID', name: 'titulo'},
-    { titulo: 'Nombre', name: 'contenido'}
+    { titulo: 'ID', name: 'id'},
+    { titulo: 'Origen', name: 'origen'},
+    { titulo: 'Destino', name: 'destino'}
   ];
 
   datos: any [] = [];
-  /*
-  collectionData: any [] = [
-    { columna1: 1, columna2: 'Yesid'},
-    { columna1: 2, columna2: 'Enrique'},
-    { columna1: 3, columna2: 'Davila'},
-    { columna1: 4, columna2: 'Sierra'},
-    { columna1: 1, columna2: 'Yesid'},
-    { columna1: 2, columna2: 'Enrique'},
-    { columna1: 3, columna2: 'Davila'},
-    { columna1: 4, columna2: 'Sierra'},
-    { columna1: 1, columna2: 'Yesid'},
-    { columna1: 2, columna2: 'Enrique'}
-  ];*/
 
   // dataSource = new MatTableDataSource<any>(this.datos);
   dataSource: MatTableDataSource<any>;
@@ -128,9 +118,10 @@ export class CasosComponent implements OnInit, AfterViewInit {
   openDialog() {
     const dialogRef = this.dialog.open(ModalNewComponent);
 
+    /*
     setInterval( () => {
       // this.dialog.closeAll();
       dialogRef.close();
-    }, 3000);
+    }, 3000); */
   }
 }

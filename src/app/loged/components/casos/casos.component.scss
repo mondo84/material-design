@@ -1,16 +1,14 @@
-.grid-containerr {
+.grid-casos {
   display: grid;
   max-width: 1200px;
   margin: auto;
   grid-template-columns: 1fr;
   gap: 4px;
-  grid-auto-rows: 120px;
+  grid-auto-rows: 180px;
   margin-bottom: 10px;
+  // background-color: #ff4fff;
 
     .celda {
-      max-width: 100%;
-      // background-color: #ff4fff;
-
       mat-card {
         display: flex;
         flex-direction: column;
@@ -29,23 +27,25 @@
 
         .header-card {
           display: flex;
-          width: 100%;
-          height: 90px;
-          background-color: #9dbefce1;
-          border-radius: 4px 4px 0 0;
-          // padding: 0 4px;
           position: relative;
+          width: 100%;
+          height: 120px;
+          // background-color: #9dbefce1;
+          border-radius: 3px 3px 0 0;
+          background-image: url('../../../../assets/img/fondoRelleno.png');
+          background-repeat: no-repeat;
+          background-size: cover;
 
           .content-header-card {
             width: 100%;
-            padding: 10px 10px;
+            padding: 20px 10px;
             background-color: #2a5cff83;
             border-radius: 2px 2px 0 0;
             overflow: hidden;
 
-            .titulo { font-size: 20px; color: #1a1a1ad2; }
-            .sub-titulo { font-size: 12px; color: #1a1a1ab4; margin-top: 5px; }
-            .sub-titulo2 { font-size: 12px; color: #1a1a1ab4; }
+            .titulo { font-size: 30px; color: #E3F2FD; }
+            .sub-titulo { font-size: 15px; color: #E3F2FD;  margin-left: 2px; margin-top: 10px; }
+            .sub-titulo2 { font-size: 15px; color: #E3F2FD; margin-left: 2px; }
           }
 
           button {
@@ -70,6 +70,9 @@
           margin: 0;
           position: relative;
           flex: 1 0 auto;
+          // background-color: #2989d8;
+          background: linear-gradient(90deg, #01579B 10%, #039BE5 60%, #81D4FA);
+          border-radius: 0 0 3px 3px;
 
           .contenido {
             display: flex;
@@ -77,7 +80,8 @@
             padding: 0 10px;
             height: 100%;
             // background-color: #04fa6bc7;
-            color: #707070;
+            color: #E3F2FD;
+            font-size: 15px;
           }
 
           img {
@@ -87,6 +91,36 @@
             width: 70px;
             height: 70px;
             border-radius: 50%;
+            box-shadow: 0 0 4px 2px #1E88E5;
+            transition: scale ease-out 300ms;
+            // z-index: 1000;
+            &:hover { filter: grayscale(70%); scale: 1.020; }
+          }
+
+          button {
+            position: absolute;
+            // z-index: 1000;
+            // box-shadow: 0 3px 4px 2px #1E88E5;
+            box-shadow: 0 4px 5px -1px #004bc3bc;
+
+            &.btn1 {
+              top: -38px;
+              right: 150px;
+              width: 75px;
+              height: 75px;
+              background-color: #9e61a8;
+              &:hover { background-color: #973aa5; }
+            }
+
+            &.btn2 {
+              top: -33px;
+              right: 240px;
+              width: 65px;
+              height: 65px;
+              background-color: #62d17a;
+              &:hover { background-color: #29af46; }
+            }
+
           }
         }
 
@@ -94,124 +128,203 @@
 
     }
 
-    .relleno {
-      display: block;
-      // background-color: #72aef1;
-      background-image: url('../../../../assets/img/fondoRelleno.png');
-      background-repeat: no-repeat;
-      background-size: cover;
-      box-shadow: 0 6px 6px -2px #0000008e;
-      position: relative;
-
-      .container-boton {
-        display: inline-block;
-        position: absolute;
-        bottom: 10px;
-        right: 10px;
-
-        .btn{
-          margin-right: 4px;
-          min-width: 50px;
-          width: 50px;
-          height: 35px;
-          opacity: .850;
-          background-color: #018debaf;
-          padding: 0;
-          box-shadow: 0 6px 6px -2px #0000008e;
-          color: #f8f8f8e3;
-          transition: scale 150ms linear, background-color 250ms linear;
-
-          &:hover { background-color: #018deb; }
-          &:active { scale: .900; }
-        }
-
-        .btn-circle {
-          width: 35px;
-          height: 36px;
-          // opacity: .850;
-          background-color: #00be4faf;
-          box-shadow: 0 6px 6px -2px #0000008e;
-          transition: scale 150ms linear, background-color 250ms linear;
-          &:hover { background-color: #00be4f; }
-          &:active { scale: .950; }
-        }
-      }
-    }
-
+    // Pasar los estilos del resposive aca...
   @media screen and (min-width: 599.99px) {
-    grid-template-columns: 300px 1fr;
+    // grid-template-columns: 300px 1fr;
 
     .celda {
 
-      mat-card { min-width: 250px; }
-      // .relleno { width: 50px; }
-    }
-  }
-}
+      mat-card {
+        .header-card {
 
-/*******************************************/
-.tables-container {
+        }
 
+        mat-card-content {
 
-  @media screen and (min-width: 599.99px) {
-    grid-template-columns: repeat(2, 1fr);
-
-  }
-}
-
-mat-tab-group {
-  max-width: 1200px;
-  margin: auto;
-  ::ng-deep .mat-tab-body-wrapper {
-    // background-color: #ebe706;
-
-    mat-tab-body {
-      height: 100%;
-      margin-top: 10px;
-      // background-color: #eb01d8;
-      padding-bottom: 20px;
-
-      .container-tabla {
-        width: 94%;
-        height: 300px;
-        overflow: auto;
-        margin: auto;
-
-        table {
-          width: 100%;
-          thead {
-            background-color: #018deb;
-            tr {
-              height: 30px; // Default 56px
-              th {
-                color: #fdfdfd;
-              }
-
-              th:first-child {
-                color: #fdfdfd;
-                width : 100px;
-              }
-            }
+          img {
+            top: -65px;
+            right: 15px;
+            width: 120px;
+            height: 120px;
+            // box-shadow: 0 6px 6px -2px #0000008e;
           }
-
-          tbody {
-            tr {
-              background-color: #1da5ff4b;
-              height: 30px;
-
-              td {
-                font-size: 11px;
-                color: #0020b1;
-              }
-            }
-            tr:nth-child(even) {
-              background-color: #0099ff6e;
-            }
-          }
-
-        } // Cierra tabla.
+        }
       }
     }
   }
 }
 
+.example-tooltip-red {
+  background: #b71c1c;
+}
+
+/*******************************************/
+// .tables-container {
+
+  // @media screen and (min-width: 599.99px) {
+    // grid-template-columns: repeat(2, 1fr);
+
+  // }
+// }
+
+.grid-contenido {
+  display: grid;
+  grid-template-columns: minmax(250px, 1fr);
+  gap: 10px;
+  max-width: 1200px;
+  margin: auto;
+
+  .item-1 {
+    mat-card {
+      margin-bottom: 4px;
+      min-height: 80px;
+      // background: linear-gradient(90deg, #063ffa 2%, #527aff 40%, #d1dbff);
+      color: #E3F2FD;
+      padding: 2px;
+
+      mat-card-header {
+        // background-color: #1cb71c;
+        // padding: 0;
+        display: flex;
+        justify-content: center;
+
+        mat-card-title {
+          // background-color: #b71c1c;
+          margin-bottom: 0;
+          margin-top: 10px;
+        }
+      }
+
+      mat-card-content {
+        padding: 8px;
+        div {
+            font-size: 11px;
+        }
+      }
+    }
+
+    & mat-card:first-child {
+      background: linear-gradient(90deg, #aa167e 10%, #c0459b 62%, #e769c1);
+    }
+
+    & mat-card:nth-child(even) {
+      background: linear-gradient(90deg, #FF6F00 10%, #FFCA28 62%, #FFE082);
+    }
+
+    & mat-card:last-child {
+      background: linear-gradient(90deg, #33691E 10%, #7CB342 62%, #C5E1A5);
+      mat-card-content {
+        text-align: center;
+      }
+    }
+  }
+
+  .item-2 {
+    // background-color: #7df85f85;
+    mat-tab-group {
+      // background-color: #d2f31a;
+      // width: 100%;
+
+      padding-bottom: 10px;
+
+      .mat-tab-body-wrapper {
+        // background-color: #eb01d873;
+
+        mat-tab-body {
+          height: 100%;
+          margin-top: 10px;
+          // background-color: #eb01d873;
+
+          .container-tabla {
+            width: 99%;
+            // height: 300px;
+            overflow: auto;
+            margin: auto;
+            box-shadow: 0 7px 7px -1px #888888;
+
+            table {
+              width: 100%;
+              thead {
+                background-color: #018deb;
+                tr {
+                  height: 30px; // Default 56px
+                  th {
+                    color: #fdfdfd;
+                  }
+
+                  th:first-child {
+                    color: #fdfdfd;
+                    width : 100px;
+                  }
+                }
+              }
+
+              tbody {
+                tr {
+                  background-color: #1da5ff4b;
+                  height: 30px;
+                  &:hover { opacity: .800; cursor: pointer; }
+
+                  td {
+                    font-size: 11px;
+                    color: #ffffff;
+                    opacity: .990;
+                  }
+
+                  & td:first-child {
+                    background-color: #fff12f;
+                    color: #818181;
+                  }
+
+                  & td:nth-child(2) {
+                    background-color: #ffb52b;
+                    padding-left: 4px;
+                  }
+
+                  & td:nth-child(3) {
+                    background-color: #ff61dd;
+                    padding-left: 4px;
+                  }
+                }
+
+                tr:nth-child(even) {
+                  // background-color: #0099ff6e;
+                  // opacity: .950;
+                }
+              }
+
+            } // Cierra tabla.
+          }
+
+          mat-paginator {
+            margin-top: 10px;
+            // background-color: #018deb;
+            background-color: transparent;
+          }
+        }
+      }
+    }
+
+    .menu-horizontal {
+      // background-color: #b71c1c;
+      mat-card {
+        min-height: 70px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 599.99px) {
+    // grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: minmax(80px, 220px) minmax(300px, 1fr);
+
+    .item-1 {
+      mat-card {
+        mat-card-content {
+          div {
+            font-size: 12px;
+        }
+        }
+      }
+    }
+  }
+}

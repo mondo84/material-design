@@ -10,10 +10,16 @@ export class ServiceCasoService {
 
   getDatos(): any {
     const datos = [
-      { titulo: `En ruta`, contenido: 'datos tabla 1' },
-      { titulo: `En Muelle`, contenido: 'datos tabla 2' },
-      { titulo: `En Taller`, contenido: 'datos tabla 3' },
-      { titulo: `Fuera de servicio`, contenido: `datos tabla 4` },
+      { id: `100`, origen: 'Cali', destino: 'Barranquilla' },
+      { id: `101`, origen: 'Barranquilla', destino: 'Cali' },
+      { id: `104`, origen: 'Cartagena', destino: 'Bogota' },
+      { id: `109`, origen: `Bogota`, destino: 'Cartagena' },
+      { id: `114`, origen: `Bucaramanga`, destino: 'Medellin' },
+      { id: `116`, origen: 'Medellin', destino: 'Bucaramanga' },
+      { id: `200`, origen: 'Cienega', destino: 'Cucuta' },
+      { id: `209`, origen: 'Cucuta', destino: 'Cienega' },
+      { id: `212`, origen: `Maicao`, destino: 'Santa Marta' },
+      { id: `250`, origen: `Santa Marta`, destino: 'Maicao' },
     ];
 
     return datos;

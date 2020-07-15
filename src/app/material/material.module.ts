@@ -18,6 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';       // Modal.
 import { MatTabsModule } from '@angular/material/tabs';           // Tabs.
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; // Spinner.
 import { MatPaginatorModule } from '@angular/material/paginator'; // Paginador.
+import { MatTooltipModule } from '@angular/material/tooltip';     // Tooltip.
 
 // ====== Importaciones de CDK material design
 import { CdkScrollableModule } from '@angular/cdk/scrolling'; // Contenedor con scroll
@@ -49,7 +50,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatDialogModule,
     MatTabsModule,
     MatProgressSpinnerModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatTooltipModule
   ],
   exports: [
     MatSliderModule,
@@ -70,7 +72,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatDialogModule,
     MatTabsModule,
     MatProgressSpinnerModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatTooltipModule
   ]
 })
 export class MaterialModule { }
